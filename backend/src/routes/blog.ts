@@ -49,7 +49,7 @@ blogRouter.post("/", async (c) => {
     });
   }
   try {
-    const post = await prisma.blog.create({
+    const blog = await prisma.blog.create({
       data: {
         title: body.title,
         content: body.content,
@@ -59,7 +59,7 @@ blogRouter.post("/", async (c) => {
     return c.json({
       message: "Blog posted",
       Userid: authorId,
-      postId: post.id,
+      blogId: blog.id,
     });
   } catch (error) {
     c.status(403);
@@ -85,37 +85,47 @@ blogRouter.put("/", async (c) => {
       where: { id: body.id },
       data: { title: body.title, content: body.content },
     });
-    return c.json({ success: "Post updated" });
+    return c.json({ success: "Blog updated" });
   } catch (error) {
     c.status(411);
     return c.json({
-      error: "Error updating your post",
+      error: "Error updating your blog",
     });
   }
 });
 blogRouter.get("/bulk", async (c) => {
   const prisma = getPrisma(c.env.DATABASE_URL);
-  const blog = await prisma.blog.findMany();
+  const blog = await prisma.blog.findMany({
+    include: {
+      author: {
+        select: {
+          name: true,
+        },
+      },
+    },
+  });
   return c.json({ blog });
 });
 
 blogRouter.get("/:id", async (c) => {
-  const postId = Number(c.req.param("id"));
+  const blogId = Number(c.req.param("id"));
   const prisma = getPrisma(c.env.DATABASE_URL);
   try {
-    const post = await prisma.blog.findUnique({
+    const blog = await prisma.blog.findUnique({
       where: {
-        id: postId,
+        id: blogId,
+      },
+      include: {
+        author: { select: { name: true } },
       },
     });
     return c.json({
-      post,
-      id: postId,
+      blog,
     });
   } catch (error) {
     c.status(404);
     return c.json({
-      error: "Post not found",
+      error: "Blog not found",
     });
   }
 });
