@@ -1,7 +1,10 @@
 import { Hono } from "hono";
 import { getPrisma } from "../prismaFunction";
 import { sign, verify } from "hono/jwt";
-import { createBlogInput, updateBlogInput } from "@shashwatshiv/medium-common";
+import {
+  createBlogInput,
+  updateBlogInput,
+} from "@shashwatshiv/expressblog-common";
 export const blogRouter = new Hono<{
   Bindings: {
     DATABASE_URL: string;
@@ -17,7 +20,7 @@ blogRouter.use("/*", async (c, next) => {
   if (!jwt) {
     c.status(401);
     return c.json({
-      error: "Unauthorized Access",
+      error: "Unauthorized Access/ Not Logged In",
     });
   }
   const token = jwt.split(" ")[1];
@@ -46,7 +49,7 @@ blogRouter.post("/", async (c) => {
     });
   }
   try {
-    const post = await prisma.post.create({
+    const post = await prisma.blog.create({
       data: {
         title: body.title,
         content: body.content,
@@ -78,7 +81,7 @@ blogRouter.put("/", async (c) => {
     });
   }
   try {
-    const put = await prisma.post.update({
+    const put = await prisma.blog.update({
       where: { id: body.id },
       data: { title: body.title, content: body.content },
     });
@@ -92,7 +95,7 @@ blogRouter.put("/", async (c) => {
 });
 blogRouter.get("/bulk", async (c) => {
   const prisma = getPrisma(c.env.DATABASE_URL);
-  const blog = await prisma.post.findMany();
+  const blog = await prisma.blog.findMany();
   return c.json({ blog });
 });
 
@@ -100,7 +103,7 @@ blogRouter.get("/:id", async (c) => {
   const postId = Number(c.req.param("id"));
   const prisma = getPrisma(c.env.DATABASE_URL);
   try {
-    const post = await prisma.post.findUnique({
+    const post = await prisma.blog.findUnique({
       where: {
         id: postId,
       },
