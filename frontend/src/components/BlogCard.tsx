@@ -1,28 +1,36 @@
+import { Link } from "react-router";
+
 interface BlogCardProps {
   authorName: string;
   title: string;
   content: string;
   publishedDate: string;
+  id: number;
 }
 export const BlogCard = ({
   authorName,
   title,
   content,
   publishedDate,
+  id,
 }: BlogCardProps) => {
   return (
-    <div className="flex-col flex gap-y-2 border-b p-4 border-slate-300 pb-4">
-      <div className=" text-sm gap-1 flex items-center">
-        <Avatar name={authorName}></Avatar>
-        <div className="font-light">{authorName}</div>
-        <div className=" text-slate-500 font-thin">{"· " + publishedDate}</div>
+    <Link to={`/blog/${id}`}>
+      <div className="flex-col flex gap-y-2 border-b p-4 border-slate-300 pb-4">
+        <div className=" text-sm gap-1 flex items-center">
+          <Avatar name={authorName}></Avatar>
+          <div className="font-light">{authorName}</div>
+          <div className=" text-slate-500 font-thin">
+            {"· " + publishedDate}
+          </div>
+        </div>
+        <div className="font-semibold text-xl">{title}</div>
+        <div className="text-slate-800">{content.slice(0, 100) + " ..."}</div>
+        <div className="text-slate-500 text-sm">
+          {Math.ceil(content.length / 200) + " min read"}
+        </div>
       </div>
-      <div className="font-semibold text-xl">{title}</div>
-      <div className="text-slate-800">{content.slice(0, 100) + " ..."}</div>
-      <div className="text-slate-500 text-sm">
-        {Math.ceil(content.length / 200) + " min read"}
-      </div>
-    </div>
+    </Link>
   );
 };
 

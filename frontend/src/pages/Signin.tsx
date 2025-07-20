@@ -14,7 +14,7 @@ export const Signin = () => {
         `${BACKEND_URL}/api/v1/user/signin`,
         signinInput,
       );
-      const jwt = response.data;
+      const jwt = response.data.token;
       localStorage.setItem("token", jwt);
       navigate("/blog");
     } catch (error) {
