@@ -1,0 +1,51 @@
+interface BlogCardProps {
+  authorName: string;
+  title: string;
+  content: string;
+  publishedDate: string;
+}
+export const BlogCard = ({
+  authorName,
+  title,
+  content,
+  publishedDate,
+}: BlogCardProps) => {
+  return (
+    <div className="flex-col flex gap-y-2 border-b p-4 border-slate-300 pb-4">
+      <div className=" text-sm gap-1 flex items-center">
+        <Avatar name={authorName}></Avatar>
+        <div className="font-light">{authorName}</div>
+        <div className=" text-slate-500 font-thin">{"· " + publishedDate}</div>
+      </div>
+      <div className="font-semibold text-xl">{title}</div>
+      <div className="text-slate-800">{content.slice(0, 100) + " ..."}</div>
+      <div className="text-slate-500 text-sm">
+        {Math.ceil(content.length / 200) + " min read"}
+      </div>
+    </div>
+  );
+};
+
+export const Avatar = ({
+  name,
+  size = "small",
+}: {
+  name: string;
+  size?: "small" | "big";
+}) => {
+  return (
+    <div
+      className={`relative inline-flex items-center justify-center ${
+        size === "small" ? "w-5 h-5" : "w-8 h-8"
+      } overflow-hidden bg-gray-400 rounded-full`}
+    >
+      <span
+        className={`font-medium ${
+          size === "small" ? "" : "text-xl"
+        } text-gray-100`}
+      >
+        {name.slice(0, 1)}
+      </span>
+    </div>
+  );
+};
