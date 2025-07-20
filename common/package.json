@@ -1,6 +1,6 @@
 {
-  "name": "@shashwatshiv/medium-common",
-  "version": "1.0.1",
+  "name": "@shashwatshiv/expressblog-common",
+  "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
   "scripts": {

@@ -14,9 +14,9 @@ importers:
       '@prisma/extension-accelerate':
         specifier: ^2.0.1
         version: 2.0.1(@prisma/client@6.10.1(prisma@6.10.1))
-      '@shashwatshiv/medium-common':
-        specifier: ^1.0.1
-        version: 1.0.1
+      '@shashwatshiv/expressblog-common':
+        specifier: ^1.0.0
+        version: 1.0.0
       hono:
         specifier: ^4.8.3
         version: 4.8.3
@@ -385,8 +385,8 @@ packages:
   '@prisma/get-platform@6.10.1':
     resolution: {integrity: sha512-4CY5ndKylcsce9Mv+VWp5obbR2/86SHOLVV053pwIkhVtT9C9A83yqiqI/5kJM9T1v1u1qco/bYjDKycmei9HA==}
 
-  '@shashwatshiv/medium-common@1.0.1':
-    resolution: {integrity: sha512-7NN3GoJsCRSSntdqA1ndx5d1Dgpd+sh5FpwFTdD9hgVEFPh6jLINOH5ZtkCFhAEAczQeFWgsuJ1bJ+jMTs7qXg==}
+  '@shashwatshiv/expressblog-common@1.0.0':
+    resolution: {integrity: sha512-c7SwsRIUKzNZTlhifHPXvJqZbBDNIqzekgB/KDeDsoL8SEllFV3cQLxXgjuf5j8n28vIPzRT/7usbaalhKilQw==}
 
   acorn-walk@8.3.2:
     resolution: {integrity: sha512-cjkyv4OtNCIeqhHrfS81QWXoCBPExR/J62oyEqepVw8WaQeSqpW2uhuLPh1m9eWhDuOo/jUXVTlifvesOWp/4A==}
@@ -570,8 +570,8 @@ packages:
   zod@3.22.3:
     resolution: {integrity: sha512-EjIevzuJRiRPbVH4mGc8nApb/lVLKVpmUhAaR5R5doKGfAnGJ6Gr3CViAVjP+4FWSxCsybeWQdcgCtbX+7oZug==}
 
-  zod@3.25.67:
-    resolution: {integrity: sha512-idA2YXwpCdqUSKRCACDE6ItZD9TZzy3OZMtpfLoh6oPR47lipysRrJfjzMqFxQ3uJuUPyUeWe1r9vLH33xO/Qw==}
+  zod@3.25.76:
+    resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
 
 snapshots:
 
@@ -803,9 +803,9 @@ snapshots:
     dependencies:
       '@prisma/debug': 6.10.1
 
-  '@shashwatshiv/medium-common@1.0.1':
+  '@shashwatshiv/expressblog-common@1.0.0':
     dependencies:
-      zod: 3.25.67
+      zod: 3.25.76
 
   acorn-walk@8.3.2: {}
 
@@ -1016,4 +1016,4 @@ snapshots:
 
   zod@3.22.3: {}
 
-  zod@3.25.67: {}
+  zod@3.25.76: {}
