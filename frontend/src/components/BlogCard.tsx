@@ -18,7 +18,7 @@ export const BlogCard = ({
     <Link to={`/blog/${id}`}>
       <div className="flex-col flex gap-y-2 border-b p-4 border-slate-300 pb-4">
         <div className=" text-sm gap-1 flex items-center">
-          <Avatar name={authorName}></Avatar>
+          <Avatar user={authorName}></Avatar>
           <div className="font-light">{authorName}</div>
           <div className=" text-slate-500 font-thin">
             {"· " + publishedDate}
@@ -35,10 +35,10 @@ export const BlogCard = ({
 };
 
 export const Avatar = ({
-  name,
+  user,
   size = "small",
 }: {
-  name: string;
+  user: string;
   size?: "small" | "big";
 }) => {
   return (
@@ -52,7 +52,7 @@ export const Avatar = ({
           size === "small" ? "" : "text-xl"
         } text-gray-100`}
       >
-        {name.slice(0, 1)}
+        {user.slice(0, 1)}
       </span>
     </div>
   );

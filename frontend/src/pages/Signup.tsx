@@ -3,31 +3,16 @@ import { DarkButton, LabelledInput } from "../components/Auth";
 import { useState } from "react";
 import { type SignupInput } from "@shashwatshiv/expressblog-common";
 import { Link } from "react-router";
-import { useNavigate } from "react-router";
-import axios from "axios";
-import { BACKEND_URL } from "../config";
+
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
 export const Signup = () => {
+  const { signup } = useContext(AuthContext)!;
   const [signupInput, setSignupInput] = useState<SignupInput>({
     name: "",
     email: "",
     password: "",
   });
-  const navigate = useNavigate();
-
-  async function sendRequest() {
-    try {
-      const response = await axios.post(
-        `${BACKEND_URL}/api/v1/user/signup`,
-        signupInput,
-      );
-      const jwt = response.data;
-      localStorage.setItem("token", jwt);
-      navigate("/blog");
-    } catch (error) {
-      console.log(error);
-      alert("Error is signup");
-    }
-  }
   return (
     <div className=" flex">
       <div className=" w-full md:w-1/2">
@@ -64,7 +49,12 @@ export const Signup = () => {
                 setSignupInput({ ...signupInput, password: e.target.value });
               }}
             ></LabelledInput>
-            <DarkButton onClick={sendRequest} input="Signup"></DarkButton>
+            <DarkButton
+              onClick={() => {
+                signup(signupInput);
+              }}
+              input="Signup"
+            ></DarkButton>
           </div>
         </div>
       </div>

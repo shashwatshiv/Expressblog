@@ -9,6 +9,8 @@ export const userRouter = new Hono<{
   };
 }>();
 
+//signup
+
 userRouter.post("/signup", async (c) => {
   const prisma = getPrisma(c.env.DATABASE_URL);
 
@@ -42,6 +44,7 @@ userRouter.post("/signup", async (c) => {
 
 userRouter.post("/signin", async (c) => {
   const body = await c.req.json();
+
   const prisma = getPrisma(c.env.DATABASE_URL);
   const { success } = signinInput.safeParse(body);
   if (!success) {

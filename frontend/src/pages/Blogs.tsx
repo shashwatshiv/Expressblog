@@ -5,9 +5,13 @@ import { format } from "date-fns";
 export const Blogs = () => {
   const { loading, blogs } = useBlogs();
   if (loading) {
-    return <div> Loading </div>;
+    return (
+      <div>
+        <Appbar></Appbar> <div>Loading...</div>{" "}
+      </div>
+    );
   }
-  console.log(blogs);
+
   return (
     <div>
       <Appbar></Appbar>

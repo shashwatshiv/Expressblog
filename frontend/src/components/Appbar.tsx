@@ -1,11 +1,11 @@
-import { Avatar } from "./BlogCard";
+import Dropdown from "./Dropdown";
 
 export const Appbar = () => {
   return (
-    <div className="flex justify-between px-10 py-4 border-b">
+    <div className="flex items-center justify-between px-10 py-2 border-b">
       <div className="text-2xl">Express </div>
       <div>
-        <Avatar size="big" name="Shashwat"></Avatar>
+        <Dropdown></Dropdown>
       </div>
     </div>
   );

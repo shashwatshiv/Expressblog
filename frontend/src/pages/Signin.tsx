@@ -1,26 +1,12 @@
 import { useState } from "react";
 import { LabelledInput, DarkButton } from "../components/Auth";
 import { Quote } from "../components/Quote";
-import { Link, useNavigate } from "react-router";
-import axios from "axios";
-import { BACKEND_URL } from "../config";
+import { Link } from "react-router";
 import { type SigninInput } from "@shashwatshiv/expressblog-common";
-export const Signin = () => {
-  const navigate = useNavigate();
+import useAuth from "../hooks/useAuth";
 
-  async function sendRequest() {
-    try {
-      const response = await axios.post(
-        `${BACKEND_URL}/api/v1/user/signin`,
-        signinInput,
-      );
-      const jwt = response.data.token;
-      localStorage.setItem("token", jwt);
-      navigate("/blog");
-    } catch (error) {
-      console.log(error);
-    }
-  }
+export const Signin = () => {
+  const { signin } = useAuth()!;
   const [signinInput, setSigninInput] = useState<SigninInput>({
     email: "",
     password: "",
@@ -53,7 +39,12 @@ export const Signin = () => {
                 setSigninInput({ ...signinInput, password: e.target.value });
               }}
             ></LabelledInput>
-            <DarkButton onClick={sendRequest} input="Signin"></DarkButton>
+            <DarkButton
+              onClick={() => {
+                signin(signinInput);
+              }}
+              input="Signin"
+            ></DarkButton>
           </div>
         </div>
       </div>
