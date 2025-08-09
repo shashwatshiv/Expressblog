@@ -7,6 +7,8 @@ import { UserProfile } from "./pages/UserProfile";
 import { LandingPage } from "./pages/LandingPage";
 import { Blogs } from "./pages/Blogs";
 import { AuthProvider } from "./contexts/AuthProvider";
+import Footer from "./components/Footer";
+import WriteBlog from "./pages/WriteBlog";
 function App() {
   return (
     <>
@@ -18,12 +20,14 @@ function App() {
             <Route path="/signin" element={<Signin />} />
             <Route path="/blogs" element={<Blogs />} />
             <Route element={<ProtectedRoutes />}>
+              <Route path="/write" element={<WriteBlog />} />
               <Route path="/blog/:id" element={<Blog />} />
               <Route path="/user" element={<UserProfile />} />
             </Route>
           </Routes>
         </AuthProvider>
       </BrowserRouter>
+      <Footer />
     </>
   );
 }

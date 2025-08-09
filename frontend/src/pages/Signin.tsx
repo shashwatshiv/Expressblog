@@ -18,7 +18,7 @@ export const Signin = () => {
           <div className="text-3xl font-bold">Login</div>
           <div className="text-slate-500 font-medium mb-4">
             Don't have an Account ?
-            <Link className="underline text-blue-600 pl-2" to={"/signup"}>
+            <Link className="underline text-emerald-500 pl-2" to={"/signup"}>
               Signup
             </Link>
           </div>
@@ -44,7 +44,7 @@ export const Signin = () => {
                 signin(signinInput);
               }}
               input="Signin"
-            ></DarkButton>
+            ></DarkButton >
           </div>
         </div>
       </div>

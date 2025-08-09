@@ -20,7 +20,7 @@ export const Signup = () => {
           <div className="text-3xl font-bold">Create an Account</div>
           <div className="text-slate-500 font-medium mb-4">
             Already have an account ?
-            <Link className="underline text-blue-600 pl-2" to={"/signin"}>
+            <Link className="underline text-emerald-500 pl-2" to={"/signin"}>
               Sign In
             </Link>
           </div>

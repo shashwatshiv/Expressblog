@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { type User, AuthContext } from "./AuthContext";
 import {
@@ -12,6 +12,32 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    async function verifyToken() {
+      try {
+        const response = await axios.get(`${BACKEND_URL}/api/v1/verify-token`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        console.log(response.data.validUser);
+
+        if (response.data.validUser) {
+          setIsAuthenticated(true);
+          setUser(response.data.user);
+        } else {
+          setIsAuthenticated(false);
+          setUser(null);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    if (localStorage.getItem("token") !== null) {
+      verifyToken();
+    }
+  }, []);
 
   async function signup(signupInput: SignupInput) {
     try {
@@ -35,7 +61,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         `${BACKEND_URL}/api/v1/user/signin`,
         signinInput,
       );
-      console.log(response);
       const jwt = response.data.token;
       localStorage.setItem("token", jwt);
       setIsAuthenticated(true);
