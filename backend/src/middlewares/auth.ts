@@ -1,4 +1,3 @@
-import { Hono } from "hono";
 import { sign, verify } from "hono/jwt";
 export default async function authMiddleware(c: any, next: any) {
   const jwt = c.req.header("Authorization");

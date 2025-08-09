@@ -14,8 +14,24 @@ export const blogRouter = new Hono<{
     userId: string;
   };
 }>();
+
+blogRouter.get("/bulk", async (c) => {
+  const prisma = getPrisma(c.env.DATABASE_URL);
+  let blog = await prisma.blog.findMany({
+    include: {
+      author: {
+        select: {
+          name: true,
+        },
+      },
+    },
+  });
+  blog = blog.reverse();
+
+  return c.json({ blog });
+});
 // Middleware
-blogRouter.use("/*", async (c, next) => {
+blogRouter.use(async (c, next) => {
   const jwt = c.req.header("Authorization");
   if (!jwt) {
     c.status(401);
@@ -92,19 +108,6 @@ blogRouter.put("/", async (c) => {
       error: "Error updating your blog",
     });
   }
-});
-blogRouter.get("/bulk", async (c) => {
-  const prisma = getPrisma(c.env.DATABASE_URL);
-  const blog = await prisma.blog.findMany({
-    include: {
-      author: {
-        select: {
-          name: true,
-        },
-      },
-    },
-  });
-  return c.json({ blog });
 });
 
 blogRouter.get("/:id", async (c) => {
