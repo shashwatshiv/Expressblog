@@ -30,9 +30,11 @@ userRouter.post("/signup", async (c) => {
         password: body.password,
       },
     });
+
     const token = await sign({ id: user.id }, c.env.JWT_SECRET);
     return c.json({
-      jwt: token,
+      token: token,
+      name: user.name,
     });
   } catch (error) {
     c.status(411);
@@ -41,6 +43,8 @@ userRouter.post("/signup", async (c) => {
     });
   }
 });
+
+//signin
 
 userRouter.post("/signin", async (c) => {
   const body = await c.req.json();
@@ -57,6 +61,8 @@ userRouter.post("/signin", async (c) => {
     const user = await prisma.user.findFirst({
       where: { email: body.email, password: body.password },
     });
+    // console.log(user);
+
     if (!user) {
       c.status(403);
       return c.json({
@@ -66,6 +72,7 @@ userRouter.post("/signin", async (c) => {
     const token = await sign({ id: user.id }, c.env.JWT_SECRET);
     return c.json({
       token: token,
+      name: user.name,
     });
   } catch (error) {
     c.status(411);
