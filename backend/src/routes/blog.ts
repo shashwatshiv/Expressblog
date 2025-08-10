@@ -5,6 +5,7 @@ import {
   createBlogInput,
   updateBlogInput,
 } from "@shashwatshiv/expressblog-common";
+import authMiddleware from "../middlewares/auth";
 export const blogRouter = new Hono<{
   Bindings: {
     DATABASE_URL: string;
@@ -31,25 +32,7 @@ blogRouter.get("/bulk", async (c) => {
   return c.json({ blog });
 });
 // Middleware
-blogRouter.use(async (c, next) => {
-  const jwt = c.req.header("Authorization");
-  if (!jwt) {
-    c.status(401);
-    return c.json({
-      error: "Unauthorized Access/ Not Logged In",
-    });
-  }
-  const token = jwt.split(" ")[1];
-  const payload = await verify(token, c.env.JWT_SECRET);
-  if (!payload) {
-    c.status(401);
-    return c.json({
-      error: "Unauthorized Access/Not Logged In",
-    });
-  }
-  c.set("userId", String(payload.id));
-  await next();
-});
+blogRouter.use(authMiddleware);
 // Routes
 
 //create blog
