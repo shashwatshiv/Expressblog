@@ -5,8 +5,8 @@ export const ReadBlog = ({ title, content, author, createdAt }: Blog) => {
   const name = author.name;
   return (
     <div>
-      <div className="flex w-5/6 mx-auto my-16">
-        <div className="basis-3/4 border-r h-screen">
+      <div className=" md:flex  w-5/6 mx-auto my-16">
+        <div className="basis-3/4 border-b my-4 md:border-r h-screen">
           <div className="text-4xl font-extrabold"> {title}</div>
           <div className="text-slate-500 my-4">
             Posted on {format(new Date(createdAt), "MMMM do, yyyy")}

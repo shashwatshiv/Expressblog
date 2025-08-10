@@ -28,7 +28,7 @@ export const Blogs = () => {
     <div className="">
       <Appbar></Appbar>
       <div className="flex justify-center">
-        <div className="w-1/2   flex-col flex">
+        <div className="w-4/5 md:w-3/5   flex-col flex">
           {currentBlogs.map((blog) => (
             <BlogCard
               id={blog.id}
