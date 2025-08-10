@@ -1,10 +1,34 @@
 import { useState } from "react";
 import { Appbar } from "../components/Appbar";
-import { postBlog } from "../hooks";
+import { useNavigate } from "react-router";
+import axios from "axios";
+import { BACKEND_URL } from "../config";
 const WriteBlog = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const navigate = useNavigate();
 
+  async function postBlog(title: string, content: string) {
+    try {
+      const response = await axios.post(
+        `${BACKEND_URL}/api/v1/blog`,
+        {
+          title: title,
+          content: content,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      );
+      const data = response.data.message;
+      console.log(data);
+      navigate("/blogs");
+    } catch (e) {
+      console.log(e);
+    }
+  }
   return (
     <div>
       <Appbar></Appbar>
@@ -27,7 +51,7 @@ const WriteBlog = () => {
           />
         </div>
       </div>
-      <div className="flex justify-center m-5 ">
+      <div className="flex justify-center m-5">
         <button
           onClick={() => {
             postBlog(title, content);

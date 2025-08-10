@@ -2,6 +2,7 @@ import { useBlog } from "../hooks";
 import { useParams } from "react-router";
 import { Appbar } from "../components/Appbar";
 import { ReadBlog } from "../components/ReadBlog";
+import Loading from "../components/Loading";
 export const Blog = () => {
   const { id } = useParams();
   const { loading, blog } = useBlog({ id: id || "" });
@@ -9,7 +10,9 @@ export const Blog = () => {
     return (
       <div>
         <Appbar></Appbar>
-        <div>Loading...</div>
+        <div>
+          <Loading></Loading>
+        </div>
       </div>
     );
   }

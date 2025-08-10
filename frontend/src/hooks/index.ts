@@ -52,20 +52,4 @@ export const useBlogs = () => {
   };
 };
 
-export async function postBlog(title: string, content: string) {
-  const response = await axios.post(
-    `${BACKEND_URL}/api/v1/blog`,
-    {
-      title: title,
-      content: content,
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    },
-  );
-  const data = response.data;
 
-  console.log(data);
-}
