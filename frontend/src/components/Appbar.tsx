@@ -6,6 +6,7 @@ import useAuth from "../hooks/useAuth";
 export const Appbar = () => {
   const { isAuthenticated } = useAuth()!;
   const navigate = useNavigate();
+
   return (
     <div className="flex items-center justify-between px-10 py-3 border-b bg-neutral-50">
       <div

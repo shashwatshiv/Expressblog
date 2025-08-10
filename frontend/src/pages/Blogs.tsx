@@ -3,6 +3,7 @@ import { Appbar } from "../components/Appbar";
 import { useBlogs } from "../hooks";
 import { format } from "date-fns";
 import { useState } from "react";
+import Loading from "../components/Loading";
 export const Blogs = () => {
   const { loading, blogs } = useBlogs();
   const [currentPage, setCurrentPage] = useState(1);
@@ -16,7 +17,9 @@ export const Blogs = () => {
   if (loading) {
     return (
       <div>
-        <Appbar></Appbar> <div>Loading...</div>{" "}
+        <Appbar></Appbar>
+
+        <Loading></Loading>
       </div>
     );
   }

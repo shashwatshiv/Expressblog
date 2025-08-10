@@ -6,10 +6,11 @@ import useAuth from "../hooks/useAuth";
 export default function Downdown() {
   const navigate = useNavigate();
   const value = useAuth()!;
+  const name = localStorage.getItem("name")!;
   return (
     <Menu as="div" className="relative inline-block">
       <MenuButton className="inline-flex w-full justify-center gap-x-1.5 rounded-full bg-white px-3 py-2 text-sm font-semibold outline-none text-gray-900 shadow-xs inset-ring-1 inset-ring-gray-300 hover:bg-gray-50">
-        <Avatar size="big" user="Shashwat"></Avatar>
+        <Avatar size="big" user={name}></Avatar>
       </MenuButton>
 
       <MenuItems

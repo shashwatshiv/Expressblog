@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { type User, AuthContext } from "./AuthContext";
+import { AuthContext } from "./AuthContext";
 import {
   type SigninInput,
   type SignupInput,
@@ -10,7 +10,6 @@ import { BACKEND_URL } from "../config";
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,10 +24,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
         if (response.data.validUser) {
           setIsAuthenticated(true);
-          setUser(response.data.user);
         } else {
           setIsAuthenticated(false);
-          setUser(null);
         }
       } catch (error) {
         console.log(error);
@@ -45,9 +42,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         `${BACKEND_URL}/api/v1/user/signup`,
         signupInput,
       );
-      const jwt = response.data.jwt;
-      localStorage.setItem("token", jwt);
+
+      const token = response.data.token;
+      localStorage.setItem("token", token);
+      localStorage.setItem("name", response.data.name);
       setIsAuthenticated(true);
+
       navigate("/blogs");
     } catch (error) {
       console.log(error);
@@ -61,9 +61,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         `${BACKEND_URL}/api/v1/user/signin`,
         signinInput,
       );
-      const jwt = response.data.token;
-      localStorage.setItem("token", jwt);
+
+      const token = response.data.token;
+      localStorage.setItem("token", token);
+      localStorage.setItem("name", response.data.name);
       setIsAuthenticated(true);
+
       navigate("/blogs");
     } catch (error) {
       console.log(error);
@@ -73,11 +76,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const logout = () => {
     setIsAuthenticated(false);
     localStorage.removeItem("token");
-    setUser(null);
+    localStorage.removeItem("name");
     navigate("/");
   };
   const value = {
-    user,
     logout,
     signup,
     signin,
