@@ -5,13 +5,15 @@ export const ReadBlog = ({ title, content, author, createdAt }: Blog) => {
   const name = author.name;
   return (
     <div>
-      <div className=" md:flex  w-5/6 mx-auto my-16">
-        <div className="basis-3/4 border-b my-4 md:border-r h-screen">
+      <div className=" block md:flex  w-5/6 mx-auto my-16 min-h-screen">
+        <div className="basis-3/4 border-b my-4 md:border-r md:pr-10 ">
           <div className="text-4xl font-extrabold"> {title}</div>
           <div className="text-slate-500 my-4">
             Posted on {format(new Date(createdAt), "MMMM do, yyyy")}
           </div>
-          <div className="text-base"> {content}</div>
+          <div className="text-base">
+            <p> {content}</p>
+          </div>
         </div>
         <div className="basis-1/4 px-8">
           <div>Author</div>
