@@ -44,7 +44,11 @@ export const Signin = () => {
                 signin(signinInput);
               }}
               input="Signin"
-            ></DarkButton >
+            ></DarkButton>
+            <div>
+              <div>Test Email : alica@gmail.com</div>
+              <div>Password : rocknroll</div>
+            </div>
           </div>
         </div>
       </div>
