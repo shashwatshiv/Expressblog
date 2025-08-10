@@ -20,7 +20,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
-        console.log(response.data.validUser);
 
         if (response.data.validUser) {
           setIsAuthenticated(true);

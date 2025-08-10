@@ -1,0 +1,11 @@
+[build]
+  base = "frontend"       # Your frontend folder
+  command = "pnpm run build"
+  publish = "dist"        # Vite build output folder
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+
